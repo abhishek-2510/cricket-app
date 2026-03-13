@@ -56,7 +56,7 @@ pipeline {
         }
     }
 
-    // 6️⃣ NOTIFICATIONS
+    // 6️⃣ NOTIFICATIONS- only on console
     post {
         success {
             echo 'Deployment successful 🚀'
