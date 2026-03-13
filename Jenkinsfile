@@ -3,7 +3,7 @@ pipeline {
 
     stages {
 
-        // 1️⃣ CHECKOUT CODE (Get Code)
+        // 1️⃣ CHECKOUT (Get Code)
         stage('Checkout Code') {
             steps {
                 git branch: 'dev',
