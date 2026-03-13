@@ -3,42 +3,50 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
+        // 1️⃣ CHECKOUT (Get Code)
+        stage('Checkout Code') {
             steps {
                 git branch: 'dev',
                 url: 'https://github.com/abhishek-2510/cricket-app.git'
             }
         }
 
-        stage('Stop Old Containers') {
-            steps {
-                sh 'docker-compose down || true'
-            }
-        }
-
-        stage('Build Docker Images') {
+        // 2️⃣ BUILD (Create Docker Images)
+        stage('Build') {
             steps {
                 sh 'docker-compose build'
             }
         }
 
-        stage('Start Application') {
+        // 3️⃣ TEST (Optional — Example Health Check)
+        stage('Test') {
             steps {
+                sh 'echo "Running tests..."'
+                sh 'docker-compose config'   // validates compose file
+            }
+        }
+
+        // 4️⃣ DEPLOY (Run Containers)
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose down || true'
                 sh 'docker-compose up -d'
             }
         }
 
-        stage('Check Running Containers') {
+        // 5️⃣ VERIFY DEPLOYMENT
+        stage('Verify') {
             steps {
                 sh 'docker ps'
+                sh 'docker ps --format "table {{.Names}}\\t{{.Ports}}"'
             }
         }
-
     }
 
+    // 6️⃣ NOTIFICATIONS
     post {
         success {
-            echo 'Application deployed successfully 🚀'
+            echo 'Deployment successful 🚀'
         }
         failure {
             echo 'Deployment failed ❌'
