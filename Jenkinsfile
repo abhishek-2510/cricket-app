@@ -40,6 +40,19 @@ pipeline {
                 sh 'docker ps'
                 sh 'docker ps --format "table {{.Names}}\\t{{.Ports}}"'
             }
+	
+        }
+	//access frontend 
+	stage('Show Access URL') {
+            steps {
+                sh 'echo "Access App at: http://$(curl -s ifconfig.me):3000"'
+            }
+	}
+	//access backend 
+        stage('Show Access URL') {
+            steps {
+                sh 'echo "Backend at: http://$(curl -s ifconfig.me):5000/players"'
+            }
         }
     }
 
