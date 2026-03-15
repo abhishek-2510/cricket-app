@@ -53,10 +53,9 @@ pipeline {
     post {
 
         success {
-            echo 'Deployment successful 🚀'
-            emailext(
-                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
+            mail to: 'abhi971153@gmail.com',
+                 subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: """
 Build Successful!
 
 Job Name: ${env.JOB_NAME}
@@ -64,48 +63,21 @@ Build Number: ${env.BUILD_NUMBER}
 Build URL: ${env.BUILD_URL}
 
 Application deployed successfully.
-""",
-                to: "abhi971153@gmail.com"
-            )
+"""
         }
 
         failure {
-            echo 'Deployment failed ❌'
-            emailext(
-                subject: "FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
+            mail to: 'abhi971153@gmail.com',
+                 subject: "FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: """
 Build Failed!
 
 Job Name: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
 Build URL: ${env.BUILD_URL}
 
-Please check logs immediately.
-""",
-                to: "abhi971153@gmail.com"
-            )
-        }
-
-        unstable {
-            emailext(
-                subject: "UNSTABLE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-Build Unstable!
-
-Some tests may have failed.
-
-Job Name: ${env.JOB_NAME}
-Build Number: ${env.BUILD_NUMBER}
-Build URL: ${env.BUILD_URL}
-""",
-                to: "abhi971153@gmail.com"
-            )
-        }
-
-        always {
-            echo "Build finished at: ${new Date()}"
+Please check the logs.
+"""
         }
     }
 }
-
-"
