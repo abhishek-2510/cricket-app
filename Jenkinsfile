@@ -45,7 +45,7 @@ pipeline {
 
         stage('Show Backend URL') {
             steps {
-                sh 'echo "Backend at: http://$(curl -s ifconfig.me):5000/players"'
+                sh 'ech "Backend at: http://$(curl -s ifconfig.me):5000/players"'
             }
         }
     }
@@ -81,4 +81,3 @@ Please check the logs.
         }
     }
 }
-"
