@@ -6,8 +6,11 @@ pipeline {
         stage('Checkout Code') {
     steps {
         deleteDir()
-        git branch: 'dev',
-        url: 'https://github.com/abhishek-2510/cricket-app.git'
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: '*/dev']],
+            userRemoteConfigs: [[url: 'https://github.com/abhishek-2510/cricket-app.git']]
+        ])
     }
 }
         stage('Build') {
