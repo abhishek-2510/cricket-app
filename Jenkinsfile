@@ -4,12 +4,12 @@ pipeline {
     stages {
 
         stage('Checkout Code') {
-            steps {
-                git branch: 'dev',
-                    url: 'https://github.com/abhishek-2510/cricket-app.git'
-            }
-        }
-
+    steps {
+        deleteDir()
+        git branch: 'dev',
+        url: 'https://github.com/abhishek-2510/cricket-app.git'
+    }
+}
         stage('Build') {
     steps {
         sh 'docker-compose down --rmi all || true'
