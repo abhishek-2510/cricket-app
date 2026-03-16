@@ -11,10 +11,11 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                sh 'docker-compose build'
-            }
-        }
+    steps {
+        sh 'docker-compose down --rmi all || true'
+        sh 'docker-compose build --no-cache'
+    }
+}
 
         stage('Test') {
             steps {
