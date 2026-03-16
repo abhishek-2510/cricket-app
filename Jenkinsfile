@@ -4,7 +4,7 @@ pipeline {
     stages {
 
         stage('Checkout Code') {
-    steps 
+    steps { 
         git branch: 'dev',
             url: 'https://github.com/abhishek-2510/cricket-app.git'
     }
